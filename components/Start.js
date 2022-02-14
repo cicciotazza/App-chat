@@ -22,6 +22,7 @@ export class Start extends React.Component {
         }
     };
 
+    //color choosen for the chat screen
     changeBgColor = (newColor) => {
         bgColor = colors.color1;
         this.setState({ bgColor: newColor });
@@ -31,25 +32,49 @@ export class Start extends React.Component {
         return (
             <ImageBackground source={require('../assets/background.png')} resizeMode="cover" style={styles.image}>
                 <View style={styles.container}>
-                    <Text style={styles.title}>ChatApp</Text>
+                    <Text style={styles.title}>App-Chat</Text>
                     <View style={styles.box1}>
                         <View style={styles.input}>
                             <Icon name="user" size={30} color="#888" style={styles.icon} />
-                            <TextInput style={styles.inputText} onChangeText={(name) => this.setState({ name })} value={this.state.name} placeholder='What is your name?' />
+                            <TextInput accessible={true}
+                                accessibilityLabel="Your Name"
+                                accessibilityHint="Please insert the name you want to use on Chat-App"
+                                style={styles.inputText} onChangeText={(name) => this.setState({ name })} value={this.state.name} placeholder='Your Name' />
                         </View>
                         <View style={styles.colorBox}>
                             <View style={styles.colorTextBox}>
-                                <Text style={styles.colorText}>Choose Background Color:</Text>
+                                <Text style={styles.colorText}>Choose a Color for your chat:</Text>
                             </View>
                             <View style={styles.color}>
-                                <TouchableOpacity title='' color={colors.color1} style={styles.color1} onPress={() => this.changeBgColor(colors.color1)}></TouchableOpacity>
-                                <TouchableOpacity style={styles.color2} onPress={() => this.changeBgColor(colors.color2)}></TouchableOpacity>
-                                <TouchableOpacity style={styles.color3} onPress={() => this.changeBgColor(colors.color3)}></TouchableOpacity>
-                                <TouchableOpacity style={styles.color4} onPress={() => this.changeBgColor(colors.color4)}></TouchableOpacity>
+                                <TouchableOpacity accessible={true}
+                                    accessibilityLabel="light-blue background"
+                                    accessibilityHint="Adds light-blue background to the chat screen"
+                                    accessibilityRole="button"
+                                    style={styles.color1} onPress={() => this.changeBgColor(colors.color1)}></TouchableOpacity>
+                                <TouchableOpacity accessible={true}
+                                    accessibilityLabel="yellow background"
+                                    accessibilityHint="Adds yellow background to the chat screen"
+                                    accessibilityRole="button"
+                                    style={styles.color2} onPress={() => this.changeBgColor(colors.color2)}></TouchableOpacity>
+                                <TouchableOpacity accessible={true}
+                                    accessibilityLabel="red background"
+                                    accessibilityHint="Adds red background to the chat screen"
+                                    accessibilityRole="button"
+                                    style={styles.color3} onPress={() => this.changeBgColor(colors.color3)}></TouchableOpacity>
+                                <TouchableOpacity accessible={true}
+                                    accessibilityLabel="orange background"
+                                    accessibilityHint="Adds orange background to the chat screen"
+                                    accessibilityRole="button"
+                                    style={styles.color4} onPress={() => this.changeBgColor(colors.color4)}></TouchableOpacity>
                             </View>
                         </View>
                         <View style={styles.button}>
-                            <TouchableOpacity style={styles.buttonHeight} onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, bgColor: this.state.bgColor })}><Text style={styles.buttonText}>Start Chatting</Text></TouchableOpacity>
+                            <TouchableOpacity accessible={true}
+                                accessibilityLabel="Start your chat"
+                                accessibilityHint="Change screen to the chat"
+                                accessibilityRole="button"
+                                style={styles.buttonHeight} onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, bgColor: this.state.bgColor })}><Text style={styles.buttonText}>Start Chatting</Text></TouchableOpacity>
+
                         </View>
                     </View>
                 </View>
@@ -63,6 +88,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        flexShrink: 1,
     },
 
     box1: {
@@ -73,10 +99,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         flexShrink: 0,
-        flexGrow: 0,
-        maxWidth: '88%',
-        maxHeight: '44%',
-        
     },
 
     title: {
@@ -86,13 +108,13 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         marginTop: 60,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     image: {
         justifyContent: 'center',
         width: '100%',
-        height: '100%'
+        height: '100%',
     },
 
     button: {
@@ -180,6 +202,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         marginTop: -5,
         marginBottom: -5,
+        flexShrink: 0,
     },
 
     icon: {
