@@ -1,4 +1,5 @@
 import React from 'react';
+//components needed 
 import { View, Text, Button, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -16,6 +17,7 @@ let bgColor = '';
 export class Start extends React.Component {
     constructor(props) {
         super(props);
+        // the state of the name at the beginning is empty by default
         this.state = {
             name: '',
             bgColor: '',
@@ -32,6 +34,7 @@ export class Start extends React.Component {
         return (
             <ImageBackground source={require('../assets/background.png')} resizeMode="cover" style={styles.image}>
                 <View style={styles.container}>
+                    {/* title of the application showed */}
                     <Text style={styles.title}>App-Chat</Text>
                     <View style={styles.box1}>
                         <View style={styles.input}>
@@ -39,7 +42,12 @@ export class Start extends React.Component {
                             <TextInput accessible={true}
                                 accessibilityLabel="Your Name"
                                 accessibilityHint="Please insert the name you want to use on Chat-App"
-                                style={styles.inputText} onChangeText={(name) => this.setState({ name })} value={this.state.name} placeholder='Your Name' />
+                                // inputText will change the state of the name above which was set to be empty by default
+                                style={styles.inputText} onChangeText={(name) =>
+                                    this.setState({ name })}
+                                //setState is passed into this.state.name similar to Js Query 
+                                value={this.state.name}
+                                placeholder='Your Name' />
                         </View>
                         <View style={styles.colorBox}>
                             <View style={styles.colorTextBox}>
@@ -73,8 +81,11 @@ export class Start extends React.Component {
                                 accessibilityLabel="Start your chat"
                                 accessibilityHint="Change screen to the chat"
                                 accessibilityRole="button"
-                                style={styles.buttonHeight} onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, bgColor: this.state.bgColor })}><Text style={styles.buttonText}>Start Chatting</Text></TouchableOpacity>
-
+                                style={styles.buttonHeight}
+                                //by pressing the button "onPress" it will go to the second screen with the "props.navigation" to 'Chat' 
+                                //and passes both name ("this.state.name") and the background color ("this.state.bgcolor")
+                                onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, bgColor: this.state.bgColor })}>
+                                <Text style={styles.buttonText}>Start Chatting</Text></TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -83,6 +94,7 @@ export class Start extends React.Component {
     }
 };
 
+//style define apart as it would be with CSS  comving from the React Native {Component}
 const styles = StyleSheet.create({
     container: {
         flex: 1,

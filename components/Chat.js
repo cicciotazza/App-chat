@@ -1,7 +1,9 @@
 import React from 'react';
 //KeyboardAvoidingView importer to fix keyboard issues for older Android devices
 import { View, Text, StyleSheet, Platform, KeyboardAvoidingView } from 'react-native';
-import { GiftedChat, Bubble, Day, SystemMessage } from 'react-native-gifted-chat'
+//import GiftedChat, a popular chat UI library 
+import { GiftedChat, Bubble, Day, SystemMessage } from 'react-native-gifted-chat';
+//--https://github.com/FaridSafi/react-native-gifted-chat--
 
 export class Chat extends React.Component {
 	constructor() {
@@ -21,6 +23,7 @@ export class Chat extends React.Component {
 			messages: [
 				{
 					_id: 1,
+					//greeting message in chat
 					text: 'Hi developer',
 					createdAt: new Date(),
 					user: {
@@ -45,6 +48,7 @@ export class Chat extends React.Component {
 		}));
 	};
 
+	//renderBubble allows to alter how message bubbles are displayed
 	renderBubble(props) {
 		return (
 			<Bubble
@@ -52,14 +56,14 @@ export class Chat extends React.Component {
 				wrapperStyle={{
 					right: {
 						backgroundColor: '#000',
+						//usually is key and value, in this case a "black" colour wrapper for the text
 					}
 				}}
 			/>
 		)
 	};
 
-
-	// changes for system messages
+	// default system messages on the background
 	renderSystemMessage(props) {
 		return (
 			<SystemMessage
@@ -88,6 +92,7 @@ export class Chat extends React.Component {
 		return (
 			<View style={styles.container}>
 				<View style={{ ...styles.container, backgroundColor: bgColor ? bgColor : '#FFF' }}  >
+					{/*renderBubble can be applied here to for customization */}
 					<GiftedChat
 						renderBubble={this.renderBubble.bind(this)}
 						renderSystemMessage={this.renderSystemMessage.bind(this)}
