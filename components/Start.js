@@ -1,5 +1,5 @@
 import React from 'react';
-//components needed 
+// components needed 
 import { View, Text, Button, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -11,7 +11,7 @@ const colors = {
     color4: "#FF9200"
 }
 
-//the background colour to choose 
+// the background colour to choose 
 let bgColor = '';
 
 export class Start extends React.Component {
@@ -24,7 +24,7 @@ export class Start extends React.Component {
         }
     };
 
-    //color choosen for the chat screen
+    // color choosen for the chat screen
     changeBgColor = (newColor) => {
         bgColor = colors.color1;
         this.setState({ bgColor: newColor });
@@ -94,7 +94,7 @@ export class Start extends React.Component {
     }
 };
 
-//style define apart as it would be with CSS  comving from the React Native {Component}
+// style define apart as it would be with CSS  comving from the React Native {Component}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
