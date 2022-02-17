@@ -111,6 +111,14 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         flexShrink: 0,
+        flexGrow: 1,
+        flexDirection: "column",
+        paddingTop: 15,
+        paddingBottom: 15,
+        borderRadius: 20,
+        height: 260,
+        minHeight: 260,
+        maxHeight: 300,
     },
 
     title: {
