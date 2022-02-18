@@ -11,6 +11,10 @@ import "firebase/firestore";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import NetInfo to know wether or not an user is online
 import NetInfo from '@react-native-community/netinfo';
+// import a function that renders a map if the object contains a location
+import MapView from 'react-native-maps';
+// import che circle button from the new component
+import CustomActions from './CustomActions';
 
 
 // initialize and configure Firebase keys
@@ -37,6 +41,8 @@ export class Chat extends React.Component {
 				avatar: "",
 			},
 			isConnected: false,
+			image: null,
+			location: null
 		};
 
 		// if condition to initialize Firebase
@@ -56,7 +62,7 @@ export class Chat extends React.Component {
 		// go through each document
 		querySnapshot.forEach((doc) => {
 			// get the QueryDocumentSnapshot's data
-			let data = doc.data();
+			let data = { ...doc.data() };
 			messages.push({
 				_id: data._id,
 				text: data.text,
@@ -65,14 +71,18 @@ export class Chat extends React.Component {
 					_id: data.user._id,
 					name: data.user.name,
 					avatar: data.user.avatar
-				}
+				},
+				image: data.image || null,
+				location: data.location || null,
 			});
 		});
-		// start querying your database
+		// start by querying your db
 		this.setState({
-			messages: messages
-		});
-	};
+			messages
+		})
+		// save all messages to local AsyncStorage
+		this.saveMessages()
+	}
 
 	// getting messages from AsyncStorage, storage function in ReactNative
 	getMessages = async () => {
@@ -143,7 +153,6 @@ export class Chat extends React.Component {
 							avatar: "https://placeimg.com/140/140/any",
 						},
 						isConnected: true
-
 					});
 
 					//referencing the messages about the current user
@@ -172,8 +181,34 @@ export class Chat extends React.Component {
 			_id: message._id,
 			text: message.text || "",
 			createdAt: message.createdAt,
-			user: this.state.user
+			user: this.state.user,
+			image: message.image || "",
+			location: message.location || null
 		});
+	}
+
+	// Returns your own custom view to render a map when a user adds a location in his message
+	renderCustomView(props) {
+		const { currentMessage } = props;
+		if (currentMessage.location) {
+			return (
+				<MapView
+					style={{ width: 150, height: 100, borderRadius: 13, margin: 3 }}
+					region={{
+						latitude: currentMessage.location.latitude,
+						longitude: currentMessage.location.longitude,
+						latitudeDelta: 0.0922,
+						longitudeDelta: 0.0421,
+					}}
+				/>
+			);
+		}
+		return null;
+	}
+
+	// action button for the features
+	renderCustomActions(props) {
+		return <CustomActions {...props} />;
 	}
 
 	onSend(messages = []) {
@@ -258,6 +293,8 @@ export class Chat extends React.Component {
 						renderSystemMessage={this.renderSystemMessage.bind(this)}
 						renderDay={this.renderDay.bind(this)}
 						renderInputToolbar={this.renderInputToolbar.bind(this)}
+						renderActions={this.renderCustomActions}
+						renderCustomView={this.renderCustomView}
 						messages={this.state.messages}
 						onSend={(messages) => this.onSend(messages)}
 						user={{
