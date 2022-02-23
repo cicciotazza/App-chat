@@ -7,8 +7,19 @@ import { GiftedChat, Bubble, Day, SystemMessage, InputToolbar } from 'react-nati
 // import Firebase for storing messages and authenticate
 import * as firebase from 'firebase';
 import "firebase/firestore";
-// import AsyncStorage, a storage system provided for React Native
+
+//import AsyncStorage, a storage system provided for React Native
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+//import AsyncStorage from '@react-native-community/async-storage';
+//import AsyncStorage from @react-native-community/async-storage;
+//import AsyncStorage from '@react-native-community/async-storage';
+//import {AsyncStorage} from @react-native-community/async-storage;
+//import { AsyncStorage } from '@react-native-community/async-storage';
+//import { AsyncStorage } from 'react-native';
+//import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+
+
 // import NetInfo to know wether or not an user is online
 import NetInfo from '@react-native-community/netinfo';
 // import a function that renders a map if the object contains a location
