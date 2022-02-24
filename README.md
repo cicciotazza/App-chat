@@ -1,7 +1,7 @@
 # 📱 Native App Development & React Native
 
 ## Screenshot
-![This is a alt text.](/assets/Android.jpeg "View on an Android Smartphone")
+![This is a alt text.](/assets/Android.png "View on an Android Smartphone")
 
 ## 📄 Objective  
 To build a chat app for mobile devices using React Native. The app will provide users with a chat interface and options to share images and their location
